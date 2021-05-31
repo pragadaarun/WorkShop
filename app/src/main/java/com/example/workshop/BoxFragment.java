@@ -19,7 +19,7 @@ public class BoxFragment extends Fragment implements View.OnTouchListener {
 
     private static final String TAG = "BoxFragment";
     private View view, view1, view2, view3, view4;
-    public float x, y, dx, dy, dx1, dy1, dx2, dy2, dx3, dy3, dx4, dy4;
+    public float x, y, dx, dy, dx1, dy1, dx2, dy2, dx3, dy3, dx4, dy4, xAxis, yAxis;
     int finalLocation;
     public static final String SHARED_PREFERENCES = "shared_preferences";
     SharedPreferences sharedPreferences;
@@ -99,11 +99,13 @@ public class BoxFragment extends Fragment implements View.OnTouchListener {
                 float centreX = v.getX() + v.getWidth()  / 2;
                 float centreY = v.getY() + v.getHeight() / 2;
 
+                xAxis = event.getRawX() + x;
+                yAxis = event.getRawY() + y;
 
                 if(v==view){
 //                    Log.e(TAG, "onTouch: view dx = "  + x + " dy = " + y);
-                    editor.putFloat("point00",x);
-                    editor.putFloat("point01",  y);
+                    editor.putFloat("point00", xAxis);
+                    editor.putFloat("point01",  yAxis);
 
                     Log.w(TAG, "ACTION_UP: x = " + x + " event.getrawx = " + event.getRawX() +
                             " event.getx = " + event.getX() + " getx = " + v.getX() + " centrex = " + centreX);
@@ -112,23 +114,23 @@ public class BoxFragment extends Fragment implements View.OnTouchListener {
                     editor.apply();
                 } else if(v==view1){
 //                    Log.e(TAG, "onTouch: view1 dx1 = "  + x + " dy1 = " + y);
-                    editor.putFloat("point10", event.getRawX() + centreX);
-                    editor.putFloat("point11", event.getRawY() + centreY);
+                    editor.putFloat("point10", xAxis);
+                    editor.putFloat("point11", yAxis);
                     editor.apply();
                 } else if(v==view2){
 //                    Log.e(TAG, "onTouch: view2 dx2 = "  + x + " dy2 = " + y);
-                    editor.putFloat("point20", event.getRawX() + x);
-                    editor.putFloat("point21", event.getRawY() + y);
+                    editor.putFloat("point20", xAxis);
+                    editor.putFloat("point21", yAxis);
                     editor.apply();
                 }else if(v==view3) {
 //                    Log.e(TAG, "onTouch: view3 dx3 = "  + x + " dy3 = " + y);
-                    editor.putFloat("point30", event.getRawX() + x);
-                    editor.putFloat("point31", event.getRawY() + y);
+                    editor.putFloat("point30", xAxis);
+                    editor.putFloat("point31", yAxis);
                     editor.apply();
                 }else if(v==view4){
 //                    Log.e(TAG, "onTouch: view4 dx4 = "  + x + " dy4 = " + y);
-                    editor.putFloat("point40", event.getRawX() + x);
-                    editor.putFloat("point41", event.getRawY() + y);
+                    editor.putFloat("point40", xAxis);
+                    editor.putFloat("point41", yAxis);
                     editor.apply();
                 }
 
